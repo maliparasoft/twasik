@@ -19,3 +19,26 @@ jobs:
     - name: Build with Maven
       working-directory: jtest-demo
       run: mvn clean install jtest:jtest "-Djtest.skip=true"
+      
+    - name: Run Jtest
+      id: jtest
+      uses: parasoft/run-jtest-action@0.0.1
+      with:
+         workingDir: jtest-demo
+         input: target/jtest/jtest.data.json  
+
+    - name: Upload results (SARIF)
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+         sarif_file: jtest-demo/reports/report.sarif # reports is a default location for reports directory
+
+      # Upload archive with all report files (.xml, .html, .sarif).
+    - name: Archive reports
+      uses: actions/upload-artifact@v2
+      with:
+        name: Static analysis reports
+        path: jtest-demo/reports/*.*
+      
+      
+      
+
