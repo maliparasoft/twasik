@@ -37,7 +37,7 @@ jobs:
 
       - name: Run Jtest
         id: jtest
-        uses: lukasbasiura/run-jjtest-action@1.0.1
+        uses: parasoft/run-jtest-action@0.0.1
         with:
             workingDir: jtest-demo
             installDir: C:/Users/lukabass/jtest  # optional (path)
